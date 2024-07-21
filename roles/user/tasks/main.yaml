@@ -28,3 +28,11 @@
     groups: sudo
     append: true
   become: true
+
+- name: Make our user owner of the systemd-journald config
+  ansible.builtin.file:
+    path: '/etc/systemd/journald.conf'
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0755'
+  become: true
